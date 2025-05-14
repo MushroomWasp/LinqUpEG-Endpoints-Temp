@@ -172,12 +172,21 @@ This document provides an overview of the available endpoints in the LinqUp API.
   ```json
   {
     "userData": {
-      "name": "John Doe",
-      "bio": "User bio",
-      "avatar": "avatar_url",
-      "links": 5,
-      "pdfs": 2
-    },
+  name: "John Doe",
+  role: "Developer",
+  bio: "Loves building cool stuff.",
+  avatar: "https://cdn-icons-png.flaticon.com/128/4140/4140048.png",
+  background: "",
+  logo: "",
+  handle: "@johndoe",
+  phoneNumber: "+1234567890",
+  secondaryPhoneNumber: "",
+  whatsapp: "+1234567890",
+  userEmail: "john@example.com",
+  links: 3,
+  pdfs: 1
+}
+,
     "status": "Okay"
   }
   ```
