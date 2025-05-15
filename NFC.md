@@ -18,7 +18,7 @@ Authorization: Bearer <your_token>
 - **Request Body:**
   ```json
   {
-    "email": "string (required)",
+    "email": "string (valid email format, required)",
     "password": "string (required)",
     "NotificationToken": "string (optional)"
   }
@@ -29,11 +29,49 @@ Authorization: Bearer <your_token>
 - **Request Body:**
   ```json
   {
-    "email": "string (required)",
-    "handle": "string (required)",
-    "category": "string (required)",
+    "email": "string (valid email format, required, unique)",
+    "handle": "string (required, unique)",
+    "category": "string (required, enum: ['Creator', 'Brand', 'admin'])",
     "purchaseCode": "string (required)",
     "password": "string (required)"
+  }
+  ```
+- **Response:** User object with additional fields:
+  ```json
+  {
+    "name": "string (default: 'User')",
+    "bio": "string (default: 'Update your bio')",
+    "avatar": "string (default: default avatar URL)",
+    "role": "string (enum: ['Creator', 'Brand', 'admin'], default: 'Creator')",
+    "phoneNumber": "string (default: '')",
+    "secondaryPhoneNumber": "string (default: '')",
+    "whatsapp": "string (default: '')",
+    "userEmail": "string (default: '')",
+    "background": "string (default: '')",
+    "logo": "string (default: '')",
+    "profileview": "number (default: 0)",
+    "links": [
+      {
+        "url": "string",
+        "title": "string",
+        "icon": "string",
+        "type": "string"
+      }
+    ],
+    "socialMedia": {
+      "facebook": "string (default: '')",
+      "instagram": "string (default: '')",
+      "youtube": "string (default: '')",
+      "tiktok": "string (default: '')",
+      "twitter": "string (default: '')",
+      "linkedin": "string (default: '')",
+      "github": "string (default: '')"
+    },
+    "Health": {
+      "age": "number (default: 0)",
+      "nearPhone": "string (default: '')",
+      "dieases": "string (default: '')"
+    }
   }
   ```
 
@@ -58,7 +96,7 @@ Authorization: Bearer <your_token>
 - **Request Body:**
   ```json
   {
-    "name": "string (required)"
+    "name": "string (valid email format, required)"
   }
   ```
 
@@ -179,7 +217,13 @@ Authorization: Bearer <your_token>
 #### Create Chat
 - **POST** `/chat/StartChating`
 - **Headers:** Requires Authentication
-- **Request Body:** (Validated by CreateChatValidation)
+- **Request Body:**
+  ```json
+  {
+    "firstId": "string (required)",
+    "secondId": "string (required)"
+  }
+  ```
 
 #### Get User Chats
 - **GET** `/chat/UserChats/:id`
@@ -202,7 +246,14 @@ Authorization: Bearer <your_token>
 #### Create Message
 - **POST** `/Messages/CreateMessage`
 - **Headers:** Requires Authentication
-- **Request Body:** (Validated by SendMessageSchemaValidation)
+- **Request Body:**
+  ```json
+  {
+    "chatId": "string (required)",
+    "senderId": "string (required)",
+    "text": "any (required)"
+  }
+  ```
 
 #### Get All Messages
 - **GET** `/Messages/AllMessages/:chatId`
@@ -262,7 +313,14 @@ Authorization: Bearer <your_token>
 
 #### Create Notification
 - **POST** `/Notification/addNotification`
-- **Request Body:** (Validated by CreateNotificationValidation)
+- **Request Body:**
+  ```json
+  {
+    "recipientId": "string (required)",
+    "senderId": "string (required)",
+    "text": "string (required)"
+  }
+  ```
 
 #### Delete Selected Notifications
 - **DELETE** `/Notification/DeleteSelected/:recipientId`
@@ -295,8 +353,24 @@ Authorization: Bearer <your_token>
 - **POST** `/Products/CreateProduct`
 - **Headers:** Requires Authentication
 - **Form Data:**
-  - `Products` - Product image file
-  - Request body validated by createProductValidation
+  - `Products` - Product image file (required)
+- **Request Body:**
+  ```json
+  {
+    "name": "string (required)",
+    "Description": "string (required)",
+    "Price": "number (required)",
+    "type": "string (required, enum: ['business', 'health', 'Medal', 'Bracelet'])"
+  }
+  ```
+- **Response:** Product object with additional fields:
+  ```json
+  {
+    "CoverImage": "string (URL to uploaded image)",
+    "createdAt": "date",
+    "updatedAt": "date"
+  }
+  ```
 
 #### Delete Product
 - **DELETE** `/Products/DeleteProduct/:productId`
@@ -342,7 +416,23 @@ Authorization: Bearer <your_token>
 #### Add Serial Code
 - **POST** `/Serials/AddSerial`
 - **Headers:** Requires Authentication
-- **Request Body:** (Validated by CreateCustomLinkValidation)
+- **Request Body:**
+  ```json
+  {
+    "Code": "string (required, unique)",
+    "expireDate": "date (required)",
+    "type": "string (default: 'business')"
+  }
+  ```
+- **Response:** Serial object with additional fields:
+  ```json
+  {
+    "status": "string (enum: ['Active', 'Disactive'], default: 'Active')",
+    "condition": "string (enum: ['Sold', 'Unsold'], default: 'Unsold')",
+    "createdAt": "date",
+    "updatedAt": "date"
+  }
+  ```
 
 #### Delete Serial Code
 - **DELETE** `/Serials/DeleteCode/:id`
