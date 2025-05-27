@@ -473,7 +473,7 @@ These endpoints require authentication. The user ID is extracted from the JWT to
 
 ### POST /api/save/profile
 
-*   **Description:** Saves or updates the authenticated user's profile information (name, bio, profile picture, appearance).
+*   **Description:** Saves or updates the authenticated user's profile information (name, bio, profile picture).
 *   **Authentication:** Required (JWT Bearer Token).
 *   **Access Control:** User themselves.
 *   **Request Body:**
@@ -482,7 +482,6 @@ These endpoints require authentication. The user ID is extracted from the JWT to
       "name": "Updated Name",
       "bio": "Updated bio.",
       "profilePicture": "new_image_url.jpg", // Optional
-      "appearance": { /* new appearance settings */ } // Optional
     }
     ```
 *   **Response (Success 200):**
@@ -494,7 +493,6 @@ These endpoints require authentication. The user ID is extracted from the JWT to
         "name": "Updated Name",
         "bio": "Updated bio.",
         "profilePicture": "new_image_url.jpg",
-        "appearance": { /* ... */ }
       }
     }
     ```
@@ -507,7 +505,7 @@ These endpoints require authentication. The user ID is extracted from the JWT to
     ```
 *   **Logic:**
     1.  Uses `authenticateUser` middleware.
-    2.  Updates the `name`, `bio`, `profilePicture`, and `appearance` fields for the authenticated user.
+    2.  Updates the `name`, `bio`, `profilePicture` fields for the authenticated user.
 
 ---
 
