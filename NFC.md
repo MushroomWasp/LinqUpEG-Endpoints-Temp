@@ -6,7 +6,7 @@ All API endpoints are relative to the base URL of your server.
 ## Authentication
 Most endpoints require authentication using a JWT token. Include the token in the Authorization header:
 ```
-Authorization: Bearer <your_token>
+token: Bearer <your_token>
 ```
 
 ## API Endpoints
