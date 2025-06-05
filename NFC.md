@@ -273,11 +273,13 @@ token: Bearer <your_token>
 - **Form Data:** `ChatImage` - Image file
 
 ### Analysis (`/Analysis`)
+Note: date format: YYYY-MM-DDTHH:mm:ss.sssZ, example: 2023-10-01T12:00:00.000Z
 
 #### Add Tab View
 - **POST** `/Analysis/LinkTap/:userId`
 - **Headers:** Requires Authentication
 - **Parameters:** `userId` - User ID
+- **body**: linkId, date
 
 #### Get Tabs by Time
 - **POST** `/Analysis/TabTime/:userId`
@@ -293,11 +295,13 @@ token: Bearer <your_token>
 - **POST** `/Analysis/AddView/:userId`
 - **Headers:** Requires Authentication
 - **Parameters:** `userId` - User ID
+- **Body**: date
 
 #### Add Social Tab
 - **POST** `/Analysis/SocialTab/:userId`
 - **Headers:** Requires Authentication
 - **Parameters:** `userId` - User ID
+- **Body**: date, type
 
 #### Get Social Tabs by Time
 - **POST** `/Analysis/SocialTime/:userId`
